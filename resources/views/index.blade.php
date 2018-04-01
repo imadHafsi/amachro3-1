@@ -12,5 +12,6 @@
   <div id="app"></div>
 
   @include('scripts')
+  
 </body>
 </html>

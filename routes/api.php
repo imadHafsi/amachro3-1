@@ -17,7 +17,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Auth\LoginController@logout');
 
     Route::get('/user', function (Request $request) {
-        return $request->user();
+        return Auth::user();
     });
 
     Route::patch('settings/profile', 'Settings\UpdateProfile');

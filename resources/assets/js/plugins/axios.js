@@ -13,8 +13,8 @@ axios.interceptors.request.use(request => {
 })
 
 axios.interceptors.response.use(response => response, error => {
-  const { status } = error.response
-
+  const { status } = error.response;
+  
   if (status >= 500) {
     store.dispatch('responseMessage', {
       type: 'error',
