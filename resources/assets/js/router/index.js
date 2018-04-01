@@ -10,7 +10,7 @@ Vue.use(Router)
 
 const router = make(
   routes({ authGuard, guestGuard })
-)
+) 
 
 sync(store, router)
 

@@ -1,25 +1,36 @@
-export default ({ authGuard, guestGuard }) => [
-  { path: '/', name: 'welcome', component: require('~/pages/welcome.vue') },
 
+function route (path, file, name,children) {
+  return {
+    props:true,
+    exact: true,
+    path,
+    name,
+    children,
+    component: require(`~/pages/${file}.vue`)
+  }
+}
+
+export default ({ authGuard, guestGuard }) => [
+  route('','welcome','welcome'),
   // Authenticated routes.
   ...authGuard([
-    { path: '/home', name: 'home', component: require('~/pages/home.vue') },
-    { path: '/settings',
-      component: require('~/pages/settings/index.vue'),
-      children: [
-      { path: '', redirect: { name: 'settings.profile' } },
-      { path: 'profile', name: 'settings.profile', component: require('~/pages/settings/profile.vue') },
-      { path: 'password', name: 'settings.password', component: require('~/pages/settings/password.vue') }
-      ] }
-  ]),
+      route('/home','home','home'),
+      route('/settings','settings/index',null,
+        [
+        route('','settings/profile'),
+        route('profile','settings/profile','settings.profile'),
+        route('password','settings/password','settings.password')
+        ])
+    ]),
 
   // Guest routes.
   ...guestGuard([
-    { path: '/login', name: 'login', component: require('~/pages/auth/login.vue') },
-    { path: '/register', name: 'register', component: require('~/pages/auth/register.vue') },
-    { path: '/password/reset', name: 'password.request', component: require('~/pages/auth/password/email.vue') },
-    { path: '/password/reset/:token', name: 'password.reset', component: require('~/pages/auth/password/reset.vue') }
-  ]),
+        route('/login','auth/login','login'),
+        route('/register','auth/register','register'),
+        route('/password/reset','auth/password/email','password.request'),
+        route('/password/reset/:token','auth/password/reset','password.reset')
+    ]),
 
-  { path: '*', component: require('~/pages/errors/404.vue') }
+
+    route('*','errors/404')
 ]
