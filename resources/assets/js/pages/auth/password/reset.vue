@@ -90,7 +90,7 @@ export default {
       })
 
       // Fetch the user.
-      await this.$store.dispatch('fetchUser')
+      await this.$store.dispatch('fetchAuthData')
 
       this.$store.dispatch('responseMessage', {
         type: 'success',

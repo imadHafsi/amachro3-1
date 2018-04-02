@@ -4,6 +4,7 @@ import * as types from '../mutation-types'
 
 // state
 export const state = {
+  roles:null,
   user: null,
   token: Cookies.get('token')
 }
@@ -17,6 +18,7 @@ export const mutations = {
 
   FETCH_USER_SUCCESS (state, { user }) {
     state.user = user
+    state.roles = user.roles
   },
 
   FETCH_USER_FAILURE (state) {
@@ -25,6 +27,7 @@ export const mutations = {
   },
 
   LOGOUT (state) {
+    state.roles = null
     state.user = null
     state.token = null
 
@@ -42,10 +45,13 @@ export const actions = {
     commit('SAVE_TOKEN', payload)
   },
 
-  async fetchUser ({ commit }) {
+  async fetchAuthData ({ commit }) {
     try {
       const { data } = await axios.get('/api/user')
-      commit('FETCH_USER_SUCCESS', { user: data })
+      
+      console.log("data", data);
+      
+      commit('FETCH_USER_SUCCESS', { user: data.user })
     } catch (e) {
       commit('FETCH_USER_FAILURE')
     }
@@ -69,5 +75,6 @@ export const getters = {
   authUser: state => state.user,
   authToken: state => state.token,
   authCheck: state => state.user !== null,
-  hasPermission: state => perm => perm == 'has'
+  authRoles:state=>state.roles,
+  authPermissions:state=>state.user !== null ? state.user.permissions : null
 }

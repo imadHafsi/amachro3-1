@@ -33,7 +33,7 @@ function make (routes) {
   router.beforeEach(async (to, from, next) => {
     if (!store.getters.authCheck && store.getters.authToken) {
       try {
-        await store.dispatch('fetchUser')
+        await store.dispatch('fetchAuthData')
       } catch (e) { }
     }
 
@@ -88,7 +88,14 @@ function authGuard (routes) {
         query: { redirect: to.fullPath }
       })
     } else {
-      next()
+                if (!hasPermission(to.meta.permissionRequired,store.getters.authRoles,store.getters.authPermissions)) {
+                  next({
+                    name: 'unauthorized',
+                    query: { redirect: to.fullPath }
+                  })
+                } else {
+                  next()
+                }
     }
   })
 }
@@ -145,4 +152,28 @@ function scrollBehavior (to, from, savedPosition) {
   }
 
   return position
+}
+
+
+function hasPermission(permissionRequired,roles, permissions) {
+  if(permissionRequired==null) return true;
+
+  if(permissionRequiredInPermissions(permissions,permissionRequired)!=='undefined')
+      return permissionRequiredInPermissions(permissions,permissionRequired);
+
+  roles.forEach(function(role) {
+    if(permissionRequiredInRole(role,permissionRequired))
+      return true;
+   });
+  return false;
+}
+
+
+function permissionRequiredInRole(role,permission){
+  return role.permissions[`${permission}`]||false;
+}
+
+
+function permissionRequiredInPermissions(permissions,permission){
+  return permissions[`${permission}`];
 }

@@ -1,11 +1,12 @@
 
-function route (path, file, name,children) {
+function route (path, file, name,meta,children) {
   return {
     props:true,
     exact: true,
     path,
     name,
     children,
+    meta: { permissionRequired: meta },
     component: require(`~/pages/${file}.vue`)
   }
 }
@@ -14,23 +15,25 @@ export default ({ authGuard, guestGuard }) => [
   route('','welcome','welcome'),
   // Authenticated routes.
   ...authGuard([
-      route('/home','home','home'),
-      route('/settings','settings/index',null,
+      route('/unauthorized','errors/404','unauthorized',null),
+      route('/crud','crud/index','crud','user.create'),
+      route('/test','auth/test','test',null),
+      route('/home','home','home',null),
+      route('/settings','settings/index',null,null,
         [
-        route('','settings/profile'),
-        route('profile','settings/profile','settings.profile'),
-        route('password','settings/password','settings.password')
+        route('','settings/profile',null,null),
+        route('profile','settings/profile','settings.profile',null),
+        route('password','settings/password','settings.password',null)
         ])
     ]),
 
   // Guest routes.
   ...guestGuard([
-        route('/login','auth/login','login'),
-        route('/register','auth/register','register'),
-        route('/password/reset','auth/password/email','password.request'),
-        route('/password/reset/:token','auth/password/reset','password.reset')
+        route('/login','auth/login','login',null),
+        route('/register','auth/register','register',null),
+        route('/password/reset','auth/password/email','password.request',null),
+        route('/password/reset/:token','auth/password/reset','password.reset',null)
     ]),
-
-
-    route('*','errors/404')
+  
+    { path: '*', component: require('~/pages/errors/404.vue') }
 ]

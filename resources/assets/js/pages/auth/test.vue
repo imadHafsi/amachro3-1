@@ -17,7 +17,7 @@
               :value.sync="form.email"
               name="email"
               prepend="person_outline"
-              v-validate="'required|email'"
+              v-validate="''"
             ></email-input>
 
             <!-- Password -->
@@ -26,7 +26,7 @@
               :form="form"
               :value.sync="form.password"
               prepend="lock_outline"
-              v-validate="'required|min:8'"
+              v-validate="''"
             ></password-input>
 
             <!-- Remember Me -->
@@ -60,7 +60,7 @@
 import Form from 'vform'
 
 export default {
-  name: 'login-view',
+  name: 'test-view',
   metaInfo () {
     return { title: this.$t('login') }
   },
@@ -78,30 +78,14 @@ export default {
     async login () {
       if (await this.formHasErrors()) return
       this.busy = true
-      try
-      {
-        // Submit the form.
-            const { data } = await this.form.post('/api/login')
-            
-            console.log("Login", data);
+
+      // Submit the form.
+      const { data } = await this.form.post('/api/test')
       
-            // Save the token.
-            this.$store.dispatch('saveToken', {
-              token: data.token,
-              remember: this.remember
-            })
+      console.log("data", data);
+
       
-            // Fetch the user.
-            await this.$store.dispatch('fetchAuthData')
-            this.busy = false
       
-            // Redirect home.
-            this.$router.push({ name: 'home' })
-      }
-      catch(e)
-      {
-        this.busy = false
-      }
     }
   }
 }
