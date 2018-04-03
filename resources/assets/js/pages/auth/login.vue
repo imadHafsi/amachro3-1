@@ -66,8 +66,8 @@ export default {
   },
   data: () => ({
     form: new Form({
-      email: '',
-      password: ''
+      email: 'imad95@gmail.com',
+      password: '12457805'
     }),
     eye: true,
     remember: false,
@@ -94,9 +94,14 @@ export default {
             // Fetch the user.
             await this.$store.dispatch('fetchAuthData')
             this.busy = false
-      
+          
             // Redirect home.
             this.$router.push({ name: 'home' })
+
+            this.$toasted.show("You are successfully logged in", { 
+               theme: "success",
+               icon:'done'
+            });
       }
       catch(e)
       {

@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import * as types from '../mutation-types'
@@ -32,6 +33,11 @@ export const mutations = {
     state.token = null
 
     Cookies.remove('token')
+
+    Vue.toasted.show("You are successfully logout", { 
+               theme: "success",
+               icon:'done'
+            });
   },
 
   UPDATE_USER (state, { user }) {

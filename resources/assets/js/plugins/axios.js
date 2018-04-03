@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import axios from 'axios'
 import store from '~/store'
 import router from '~/router'
@@ -14,14 +15,19 @@ axios.interceptors.request.use(request => {
 
 axios.interceptors.response.use(response => response, error => {
   const { status } = error.response;
+  console.log("error.response", error.response);
   
   if (status >= 500) {
-    store.dispatch('responseMessage', {
-      type: 'error',
-      text: i18n.t('error_alert_text'),
-      title: i18n.t('error_alert_title'),
-      modal: true
-    })
+    // store.dispatch('responseMessage', {
+    //   type: 'error',
+    //   text: i18n.t('error_alert_text'),
+    //   title: i18n.t('error_alert_title'),
+    //   modal: true
+    // })
+    Vue.toasted.show(i18n.t('error_alert_text'), { 
+               theme: "error",
+               icon:'error'
+            });
   }
 
   if (status === 401 && store.getters.authCheck) {
@@ -37,6 +43,18 @@ axios.interceptors.response.use(response => response, error => {
       router.push({ name: 'login' })
     })
   }
+
+  // Vue.toasted.show(i18n.t('token_expired_alert_text'), { 
+  //              theme: "error",
+  //              icon:'warning',
+  //              action:{
+  //                         text : 'Cancel',
+  //                         onClick : async (e, toastObject) => {
+  //                             await store.dispatch('logout')
+  //                              router.push({ name: 'login' })
+  //                         }
+  //                     }
+  //           });
 
   return Promise.reject(error)
 })
