@@ -12,6 +12,15 @@
     <tool-bar v-on:toggleDrawer="drawer = !drawer" :drawer="drawer"></tool-bar>
     <v-content>
       <v-container fluid>
+        <v-card>
+          <v-card-text>
+            <span class="headline">{{ pageInfo.pageTitle }}</span>
+            <span>{{ pageInfo.pageDesc }}</span>
+            <span v-text="currentTime" 
+              style="display: inline-block;"
+            class='headline right'></span>
+          </v-card-text>
+        </v-card>
         <transition name="page" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -24,6 +33,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import * as moment from 'moment' 
 
 import NavMenu from '~/components/NavMenu'
 import ToolBar from '~/components/ToolBar'
@@ -39,13 +49,19 @@ export default {
   },
 
   computed: mapGetters({
-    authenticated: 'authCheck'
+    authenticated: 'authCheck',
+    pageInfo:'pageInfo'
   }),
 
   data () {
     return {
-      drawer: true
+      drawer: true,
+      currentTime:null
     }
+  },
+  created(){
+      this.currentTime = moment().format('LTS');
+          setInterval(() => this.updateCurrentTime(), 1 * 1000);
   }
 }
 </script>
