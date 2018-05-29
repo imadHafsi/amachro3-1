@@ -79,18 +79,18 @@ export default {
       name: this.$t('nav_menu_title'),
       items: [
           { header: 'Admin' },
-          { title: 'Dashboard', icon: 'dashboard', route: { name: 'home' } },
+          { title: 'dash', icon: 'dashboard', route: { name: 'home' } },
           {
-            title: 'Employees',
+            title: 'employees',
             icon: 'people',
             items: [
-            { title: 'Personel Information', route: { name: 'crud' },disabled:true },
-            { title: 'Qualifications', icon: 'school', route: { name: 'test' } },
+            { title: 'personel_info', route: { name: 'crud' },disabled:true },
+            { title: 'qlfct', icon: 'school', route: { name: 'test' } },
             ]
           },
           { divider: true },
           { header: 'System' },
-          { title: 'Settings', icon: 'settings',
+          { title: 'settings', icon: 'settings',
              route: { name: 'settings.profile' }}
         ]
     }

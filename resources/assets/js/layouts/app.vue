@@ -62,6 +62,11 @@ export default {
   created(){
       this.currentTime = moment().format('LTS');
           setInterval(() => this.updateCurrentTime(), 1 * 1000);
+  },
+  methods:{
+    updateCurrentTime(){
+      this.currentTime = moment().format('LTS');
+    }
   }
 }
 </script>

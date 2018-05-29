@@ -29,8 +29,8 @@ export default ({ authGuard, guestGuard }) => [
 
   // Guest routes.
   ...guestGuard([
-        route('/login','auth/login','login',null),
-        route('/register','auth/register','register',null),
+        route('/login','auth/login2','login',null),
+        route('/register','auth/register2','register',null),
         route('/password/reset','auth/password/email','password.request',null),
         route('/password/reset/:token','auth/password/reset','password.reset',null)
     ]),
