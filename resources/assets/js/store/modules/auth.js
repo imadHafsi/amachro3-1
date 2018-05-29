@@ -55,6 +55,7 @@ export const actions = {
     try {
       const { data } = await axios.get('/api/user')
       
+      console.log("hddhddhdhhd" );
       console.log("data", data);
       
       commit('FETCH_USER_SUCCESS', { user: data.user })

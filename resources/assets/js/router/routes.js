@@ -15,7 +15,7 @@ export default ({ authGuard, guestGuard }) => [
   route('','welcome','welcome'),
   // Authenticated routes.
   ...authGuard([
-      route('/unauthorized','errors/404','unauthorized',null),
+      route('/unauthorized','errors/unauthorized','unauthorized',null),
       route('/crud','crud/index','crud','user.create'),
       route('/test','auth/test','test',null),
       route('/home','home','home',null),

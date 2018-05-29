@@ -12,7 +12,7 @@
     <tool-bar v-on:toggleDrawer="drawer = !drawer" :drawer="drawer"></tool-bar>
     <v-content>
       <v-container fluid>
-        <v-card>
+        <v-card class="pageInfo">
           <v-card-text>
             <span class="headline">{{ pageInfo.pageTitle }}</span>
             <span>{{ pageInfo.pageDesc }}</span>
@@ -22,7 +22,7 @@
           </v-card-text>
         </v-card>
         <transition name="page" mode="out-in">
-          <router-view></router-view>
+            <router-view></router-view>
         </transition>
       </v-container>
     </v-content>

@@ -54,7 +54,7 @@ class LoginController extends Controller
 
         return [
             'token' => $token,
-            'token_type' => 'bearer',
+            'token_type' => 'bearer', 
             'expires_in' => $expiration - time(),
         ];
     }

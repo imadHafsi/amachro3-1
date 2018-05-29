@@ -80,6 +80,7 @@ export default {
       items: [
           { header: 'Admin' },
           { title: 'dash', icon: 'dashboard', route: { name: 'home' } },
+          { title: 'crud', icon: 'gradient', route: { name: 'crud' } },
           {
             title: 'employees',
             icon: 'people',

@@ -9,6 +9,7 @@
   "login": "Login",
   "register": "Register",
   "page_not_found": "Page Not Found",
+  "unauthorized": "You Are Not Authorized To View This Page",
   "go_home": "Go Home",
   "logout": "Logout",
   "email": "Email",
