@@ -1,13 +1,10 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm8 offset-sm2 lg4 offset-lg4>
-      <v-card>
-        <progress-bar :show="busy"></progress-bar>
-        <v-card-title primary-title class="grey lighten-4">
-          <h3 class="headline mb-0">{{ $t('settings') }}</h3>
+    <v-flex xs12>
+        <v-card style="borderBottom:2px solid #389583;">
+        <v-card-title class="primary">
         </v-card-title>
-        <v-divider></v-divider>
-
+        <progress-bar :show="busy"></progress-bar>
         <v-tabs icons-and-text centered fixed>
           <v-tabs-slider color="primary"></v-tabs-slider>
 
@@ -19,12 +16,25 @@
             {{ $t('password') }}
             <v-icon>lock</v-icon>
           </v-tab>
+          <v-tab href="#tab-theme">
+            {{ $t('Theme') }}
+            <v-icon>lock</v-icon>
+          </v-tab>
 
           <v-tab-item id="tab-person">
-            <profile-view v-on:busy="busy = $event"></profile-view>
+            <v-layout row wrap>
+              <profile-view v-on:busy="busy = $event"></profile-view>
+            </v-layout>
           </v-tab-item>
           <v-tab-item id="tab-password">
-            <password-view v-on:busy="busy = $event"></password-view>
+            <v-layout row wrap>
+              <password-view v-on:busy="busy = $event"></password-view>
+            </v-layout>
+          </v-tab-item>
+          <v-tab-item id="tab-theme">
+            <v-layout row wrap>
+              <theme-view v-on:busy="busy = $event"></theme-view>
+            </v-layout>
           </v-tab-item>
 
         </v-tabs>
@@ -36,17 +46,25 @@
 <script>
 import Profile from '~/pages/settings/profile'
 import Password from '~/pages/settings/password'
+import Theme from '~/pages/settings/theme'
 
 export default {
   name: 'settings-view',
   components: {
     'profile-view': Profile,
-    'password-view': Password
+    'password-view': Password,
+    'theme-view': Theme
   },
   data () {
     return {
       busy: false
     }
+  },
+  created(){
+       this.$store.dispatch('setPageInfo',{
+        pageTitle:'Setting',
+        pageDesc:'Edit setting page',
+       });
   }
 }
 </script>

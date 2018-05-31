@@ -15,28 +15,10 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Auth\LoginController@logout');
-
-    Route::get('/user', function (Request $request) {
-        $user=Auth::user();
-              Auth::user()->roles;
-              
-        $user=$user->only([
-            'name',
-            'email',
-            'last_name',
-            'first_name',
-            'permissions',
-            'roles'
-        ]);
-
-        return response()->json([
-            'user'=>$user
-        ]);
-    });
-
+    Route::get('/user/info','fetchUserDataController@info');
+    Route::get('/user/theme','fetchUserDataController@theme');
     Route::patch('settings/profile', 'Settings\UpdateProfile');
     Route::patch('settings/password', 'Settings\UpdatePassword');
-
     Route::post('test', 'TestController@test');
 });
 

@@ -5,6 +5,9 @@ import ProgressBar from './ProgressBar'
 import PasswordInput from './form/PasswordInput'
 import SubmitButton from './form/SubmitButton'
 import TextInput from './form/TextInput'
+import DatePicker from './form/DatePicker'
+import ColorInput from './form/ColorInput'
+
 import { HasError, AlertError, AlertSuccess } from 'vform'
 
 Vue.component(Icon.name, Icon)
@@ -13,6 +16,8 @@ Vue.component(ProgressBar.name, ProgressBar)
 Vue.component(PasswordInput.name, PasswordInput)
 Vue.component(SubmitButton.name, SubmitButton)
 Vue.component(TextInput.name, TextInput)
+Vue.component(DatePicker.name, DatePicker)
+Vue.component(ColorInput.name, ColorInput)
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component(AlertSuccess.name, AlertSuccess)

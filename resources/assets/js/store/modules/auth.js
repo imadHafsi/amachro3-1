@@ -53,7 +53,7 @@ export const actions = {
 
   async fetchAuthData ({ commit }) {
     try {
-      const { data } = await axios.get('/api/user')
+      const { data } = await axios.get('/api/user/info')
       
       console.log("hddhddhdhhd" );
       console.log("data", data);

@@ -1,4 +1,5 @@
 <template>
+<v-flex sm8 offset-sm2 lg4 offset-lg4>
   <v-card flat>
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <v-card-title primary-title>
@@ -33,6 +34,7 @@
       </v-card-actions>
     </form>
   </v-card>
+</v-flex>
 </template>
 
 <script>

@@ -465,4 +465,9 @@ class User extends Authenticatable implements JWTSubject,RoleableInterface, Perm
     {
         return [];
     }
+
+    public function theme()
+    {
+        return $this->hasOne('App\Theme');
+    }
 }

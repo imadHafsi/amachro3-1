@@ -1,42 +1,44 @@
 <template>
-  <v-card flat>
-    <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-      <v-card-title primary-title>
-        <h5 class="subheading mb-0">{{ $t('your_password') }}</h5>
-      </v-card-title>
-      <v-card-text>
+  <v-flex sm8 offset-sm2 lg4 offset-lg4>
+    <v-card flat>
+      <form @submit.prevent="update" @keydown="form.onKeydown($event)">
+        <v-card-title primary-title>
+          <h5 class="subheading mb-0">{{ $t('your_password') }}</h5>
+        </v-card-title>
+        <v-card-text>
 
-        <!-- Password -->
-        <password-input
-          :form="form"
-          :hint="$t('password_length_hint')"
-          :v-errors="errors"
-          :value.sync="form.password"
-          v-on:eye="eye = $event"
-          v-validate="'required|min:8'"
-        ></password-input>
+          <!-- Password -->
+          <password-input
+            :form="form"
+            :hint="$t('password_length_hint')"
+            :v-errors="errors"
+            :value.sync="form.password"
+            v-on:eye="eye = $event"
+            v-validate="'required|min:8'"
+          ></password-input>
 
-        <!-- Password Confirmation -->
-        <password-input
-          :form="form"
-          :hide="eye"
-          :label="$t('confirm_password')"
-          :v-errors="errors"
-          :value.sync="form.password_confirmation"
-          data-vv-as="password"
-          hide-icon="true"
-          name="password_confirmation"
-          v-validate="'required|confirmed:password'"
-        ></password-input>
+          <!-- Password Confirmation -->
+          <password-input
+            :form="form"
+            :hide="eye"
+            :label="$t('confirm_password')"
+            :v-errors="errors"
+            :value.sync="form.password_confirmation"
+            data-vv-as="password"
+            hide-icon="true"
+            name="password_confirmation"
+            v-validate="'required|confirmed:password'"
+          ></password-input>
 
-        <!-- <form-feedback :form="form" :text="$t('password_updated')"></form-feedback> -->
+          <!-- <form-feedback :form="form" :text="$t('password_updated')"></form-feedback> -->
 
-      </v-card-text>
-      <v-card-actions>
-        <submit-button :flat="true" :form="form" :label="$t('update')"></submit-button>
-      </v-card-actions>
-    </form>
-  </v-card>
+        </v-card-text>
+        <v-card-actions>
+          <submit-button :flat="true" :form="form" :label="$t('update')"></submit-button>
+        </v-card-actions>
+      </form>
+    </v-card>
+  </v-flex>
 </template>
 
 <script>

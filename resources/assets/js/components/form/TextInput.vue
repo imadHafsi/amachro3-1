@@ -8,7 +8,9 @@
       :label="label"
       :name="name"
       :prepend-icon="prepend"
+      :multi-line="multiLine"
       v-model="_value"
+      :hide-details="hideDetails"
     ></v-text-field>
     <has-error :form="form" :field="name"></has-error>
   </div>
@@ -44,6 +46,14 @@ export default {
     },
     counter: {
       type: [Boolean, Number, String],
+      default: false
+    },
+    multiLine: {
+      type: [Boolean],
+      default: false
+    },
+    hideDetails: {
+      type: [Boolean],
       default: false
     },
     value: {
